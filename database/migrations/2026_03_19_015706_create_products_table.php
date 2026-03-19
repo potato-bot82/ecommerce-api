@@ -11,6 +11,7 @@ public function up(): void
 {
     Schema::create('products', function (Blueprint $table) {
         $table->id();
+        $table->foreignId('category_id')->constrained()->onDelete('cascade');
         $table->string('name');
         $table->text('description')->nullable();
         $table->integer('price');

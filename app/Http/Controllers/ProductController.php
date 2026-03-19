@@ -10,7 +10,7 @@ class ProductController extends Controller
     // GET ALL
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
 
         return response()->json([
             'status' => 'success',
@@ -36,7 +36,7 @@ class ProductController extends Controller
     // SHOW
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('category')->find($id);
 
         return response()->json([
             'status' => 'success',
