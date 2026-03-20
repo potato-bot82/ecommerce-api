@@ -5,6 +5,10 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
+
 
 Route::get('/test', function () {
     return response()->json([
@@ -38,3 +42,26 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/categories', [CategoryController::class, 'store']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    // CART
+    Route::post('/cart/add', [CartController::class, 'add']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::delete('/cart/{id}', [CartController::class, 'remove']);
+
+    // ORDER
+    Route::post('/checkout', [OrderController::class, 'checkout']);
+});
+
+Route::apiResource('products', ProductController::class);
+
+
+
+
+
+
+
+
+
+
